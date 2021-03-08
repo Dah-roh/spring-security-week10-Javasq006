@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
-public class UserDetailsS implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,12 +28,12 @@ public class UserDetailsS implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
 
-    public static UserDetailsS build(User user) {
+    public static MyUserDetails build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
 
-        return new UserDetailsS(
+        return new MyUserDetails(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
