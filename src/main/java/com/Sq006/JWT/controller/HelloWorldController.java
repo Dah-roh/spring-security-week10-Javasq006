@@ -1,5 +1,6 @@
 package com.Sq006.JWT.controller;
 
+import com.Sq006.JWT.exceptions.CustomException;
 import com.Sq006.JWT.models.*;
 import com.Sq006.JWT.repositiories.RoleRepository;
 import com.Sq006.JWT.repositiories.UserRepository;
@@ -75,7 +76,7 @@ public class HelloWorldController {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new CustomException("Username is already taken!!!", HttpStatus.BAD_REQUEST));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
